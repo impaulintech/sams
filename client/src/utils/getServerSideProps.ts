@@ -1,5 +1,8 @@
+import { setCookie } from "cookies-next";
+
 export const AdminSignInOutAuthCheck = ({ req }: any) => {
   const xsrfToken = req?.cookies['XSRF-TOKEN']
+  setCookie('XSRF-TOKEN', xsrfToken)
   const path = req?.url
 
   const admin = path.includes('admin')
@@ -54,6 +57,7 @@ export const AdminSignInOutAuthCheck = ({ req }: any) => {
 
 export const UserSignInOutAuthCheck = async ({ req }: any) => {
   const xsrfToken = req?.cookies['XSRF-TOKEN']
+  setCookie('XSRF-TOKEN', xsrfToken)
   const path = req?.url
 
   const login = path.includes('login')

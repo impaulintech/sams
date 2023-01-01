@@ -9,7 +9,7 @@ const axios = Axios.create({
     'Content-Type': 'application/json',
     'X-Requested-With': 'XMLHttpRequest'
   },
-  withCredentials: true
+  withCredentials: false
 })
 
 export default axios
