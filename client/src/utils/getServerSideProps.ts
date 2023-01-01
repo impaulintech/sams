@@ -13,13 +13,15 @@ export const AdminSignInOutAuthCheck = ({ req }: any) => {
       redirect: {
         destination: '/admin',
         permanent: false
-      }
+      } 
     }
   }
 
   if (admin && !xsrfToken) {
     return {
-      props: {}
+      props: {
+        
+      }
     }
   }
 
