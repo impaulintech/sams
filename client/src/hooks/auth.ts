@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/router'
-import { deleteCookie } from 'cookies-next'
+import { deleteCookie, setCookie } from 'cookies-next'
 
 import axios from '~/shared/lib/axios'
 import { Roles } from '~/shared/data/roleConstant'
@@ -24,11 +24,13 @@ const useAuth = () => {
       await csrf()
       const response = await axios.post('register', data)
       if (response.status === 204) {
-        toast.error('Account currently not yet verified please wait to the admin for approval.', {
+        deleteCookie('XSRF-TOKEN')
+        toast.success('Account is now registered, please wait to the admin for approval.', {
           position: 'top-right'
         })
-        deleteCookie('XSRF-TOKEN')
-        window.location.href = 'login'
+        setTimeout(() => {
+          window.location.href = 'login'
+        }, 3000)
         return
       }
     } catch (err: any) {
@@ -41,7 +43,7 @@ const useAuth = () => {
     try {
       setIsError(false)
       await csrf()
-      const response = await axios.post('login', data)
+      const response = await axios.post('login', data)  
 
       if (response.statusText === 'OK') {
         if (response?.data?.role === Roles.ADMIN) {
