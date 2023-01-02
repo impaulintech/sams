@@ -2,6 +2,8 @@ import { setCookie } from "cookies-next";
 
 export const AdminSignInOutAuthCheck = ({ req }: any) => {
   const xsrfToken = req?.cookies['XSRF-TOKEN']
+  const laravelSession = req?.cookies['laravel_session']
+  setCookie('laravel_session', laravelSession)
   setCookie('XSRF-TOKEN', xsrfToken)
   const path = req?.url
 
@@ -57,6 +59,8 @@ export const AdminSignInOutAuthCheck = ({ req }: any) => {
 
 export const UserSignInOutAuthCheck = async ({ req }: any) => {
   const xsrfToken = req?.cookies['XSRF-TOKEN']
+  const laravelSession = req?.cookies['laravel_session']
+  setCookie('laravel_session', laravelSession)
   setCookie('XSRF-TOKEN', xsrfToken)
   const path = req?.url
 
